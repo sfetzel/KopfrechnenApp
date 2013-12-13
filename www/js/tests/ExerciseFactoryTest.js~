@@ -1,0 +1,42 @@
+var ExerciseFactory = require("../ExerciseFactory");
+var Exercise = require("../Exercise");
+var ExerciseOperationType = require("../ExerciseOperationType");
+
+module.exports =
+{
+	testGetNumberLengthMaxDifficulty: function(test)
+	{
+		var kopfrechnen = new Kopfrechnen();
+		kopfrechnen.Difficulty = 100;
+		var numberLength = kopfrechnen.getNumberLength();
+		test.equal(numberLength, 4);
+		test.done();
+	},
+	
+	testGetNumberLengthMinDifficulty: function(test)
+	{
+		var kopfrechnen = new Kopfrechnen();
+		kopfrechnen.Difficulty = 1;
+		var numberLength = kopfrechnen.getNumberLength();
+		test.ok(numberLength > 0);
+		test.done();
+	},
+	
+	testGetRandomNumber: function(test)
+	{
+		var kopfrechnen = new Kopfrechnen();
+		test.ok(kopfrechnen.getRandomNumber() < 10^kopfrechnen.getNumberLength());
+		test.done();
+	},
+	
+	testGetRandomAdditionExercise: function(test)
+	{
+		var kopfrechnen = new Kopfrechnen();
+		var exercise = kopfrechnen.getRandomAdditionExercise();
+		test.ok(exercise != undefined);
+		test.ok(exercise.operationType  == ExerciseOperationType.Addition);
+		test.ok(exercise.firstNumber > 0);
+		test.ok(exercise.secondNumber > 0);
+		test.done();
+	}
+}

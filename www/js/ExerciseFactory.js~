@@ -1,0 +1,43 @@
+var Exercise = require("./Exercise");
+var ExerciseOperationType = require("./ExerciseOperationType");
+
+function ExerciseFactory(difficulty)
+{
+	this.Difficulty = difficulty == undefined ? 50 : difficulty;
+}
+
+/*
+ * calculates how long the numbers are, which are used for training
+ * depending on the Difficulty level
+ */
+ExerciseFactory.prototype.getNumberLength = function()
+{
+	// 100% means 4 digits length for the numbers
+	return Math.ceil(4 / 100 * this.Difficulty);
+}
+
+ExerciseFactory.prototype.getRandomNumber = function()
+{
+	return Math.round(Math.random() * 100);
+}
+
+ExerciseFactory.prototype.getRandomAdditionExercise = function()
+{
+	var exercise = new Exercise();
+	exercise.operationType = ExerciseOperationType.Addition;
+	
+	// Todo: maximum difference?
+	exercise.firstNumber = this.getRandomNumber();
+	exercise.secondNumber = this.getRandomNumber();
+	
+	return exercise;
+}
+
+ExerciseFactory.prototype.getRandomExercise = function()
+{
+	return this.getRandomAdditionExercise();
+}
+
+
+
+module.exports = ExerciseFactory;

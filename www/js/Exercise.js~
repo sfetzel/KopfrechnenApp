@@ -1,0 +1,13 @@
+function Exercise(firstNumber, secondNumber, operationType)
+{
+	this.firstNumber = firstNumber;
+	this.secondNumber = secondNumber;
+	this.operationType = operationType;
+}
+
+Exercise.prototype.toString = function()
+{
+	return this.FirstNumber + " " + this.operationType + " " + this.SecondNumber;
+}
+
+module.exports = Exercise;
