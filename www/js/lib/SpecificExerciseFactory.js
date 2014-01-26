@@ -1,18 +1,13 @@
 
 function SpecificExerciseFactory()
 {
-	this.getRandomExercise = function(difficulty)
-	{
-		throw "Not implemented exception"; 
-	}
-	
 	this.getNumberLength = function(difficulty)
 	{
 		var numberLength = undefined;
 		
 		if(difficulty > 0)
 		{
-			numberLength = Math.floor(4 / 100 * difficulty);
+			numberLength = Math.floor(4 / 100 * difficulty) + 1;
 		}
 		
 		return numberLength;
@@ -32,10 +27,17 @@ function SpecificExerciseFactory()
 		
 		if(start != undefined)
 			number += start;
-			
+		
+		number = Math.floor(number);
+		
 		return number;
 	}
 	
+}
+
+SpecificExerciseFactory.prototype.getRandomExercise = function(difficulty)
+{
+	throw "Not implemented exception"; 
 }
 
 module.exports = SpecificExerciseFactory;

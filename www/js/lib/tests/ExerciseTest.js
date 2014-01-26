@@ -7,6 +7,7 @@ module.exports =
 		var correctAnswer = 1234;
 		var exercise = new Exercise("Hello, solve 1200 + 34", correctAnswer);
 		test.ok(exercise.check(correctAnswer));
+		test.ok(exercise.getIsCorrectAnswered());
 		test.done();
 	},
 	

@@ -4,10 +4,11 @@ var Exercise = require("../Exercise");
 
 function MockSpecificExerciseFactory()
 {
+	this.theSolution = "quatsch";
+	
 	this.getRandomExercise = function(difficulty)
 	{
-		var exercise = new Exercise();
-		exercise.text = "Find the corner of a circle!";
+		var exercise = new Exercise("Find the corner of a circle!", this.theSolution);
 		return exercise;
 	}
 }
