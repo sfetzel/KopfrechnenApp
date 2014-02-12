@@ -1,4 +1,4 @@
-var SimpleExerciseFactory = require("../SimpleExerciseFactory");
+var SimpleExerciseFactory = require("./SimpleExerciseFactory");
 var util = require("util");
 
 function MultiplicationExerciseFactory()
