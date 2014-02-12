@@ -2,12 +2,15 @@ var ExerciseFactory = require("./ExerciseFactory");
 var EventEmitter = require("events").EventEmitter;
 var util = require("util");
 
-function Training()
-{		
+function Training(difficulty)
+{
+	if(parseInt(difficulty) === Math.NaN)
+		throw "Difficulty argument missing";
+		
 	this.startTime = undefined;
 	this.stopTime = undefined;
 	this.exercisesDone = Array();
-	
+	this.Difficulty = difficulty;
 	var currentExercise = undefined;
 	var isDone = false;
 	
@@ -35,7 +38,7 @@ function Training()
 	
 	function createExercise()
 	{
-		var exercise = ExerciseFactory.getRandomExercise();
+		var exercise = ExerciseFactory.getRandomExercise(self.Difficulty);
 		exercise.on("answered", function()
 		{
 			self.exercisesDone.push(exercise);

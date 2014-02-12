@@ -46,7 +46,7 @@ module.exports =
 	
 	testGetCurrentExercise: function(test)
 	{
-		var training = new Training();
+		var training = new Training(12);
 		var exercise = training.getCurrentExercise();
 		test.notEqual(exercise, undefined);
 		test.done();
@@ -54,7 +54,7 @@ module.exports =
 	
 	testExerciseDone: function(test)
 	{
-		var training = new Training();
+		var training = new Training(12);
 		var exercise = training.getCurrentExercise();
 		test.notEqual(exercise, undefined);
 		exercise.check((new MockSpecificExerciseFactory()).theSolution);
@@ -65,7 +65,7 @@ module.exports =
 	
 	exerciseDoneEventRaised: function(test)
 	{
-		var training = new Training();
+		var training = new Training(12);
 		var isEventRaised = false;
 		training.on("exerciseDone", function(){ isEventRaised = true; });
 		
@@ -77,7 +77,7 @@ module.exports =
 	
 	stopEventRaised: function(test)
 	{
-		var training = new Training();
+		var training = new Training(12);
 		var isEventRaised = false;
 		training.on("stop", function(){ isEventRaised = true; });
 		

@@ -4,17 +4,17 @@ var TimeTraining = require("./TimeTraining");
 
 function TimeTrainingConfiguration()
 {
-	this.Length = 50;
+	this.Length = 60;
 }
 
-TrainingConfiguration.prototype.create = function()
+TrainingConfiguration.prototype.create = function(difficulty)
 {
 	var training = undefined;
-	var length = parseInt(this.Length)
 	
-	if(length != Math.NaN)
+	if(parseInt(this.Length) !== Math.NaN && this.Length !== undefined)
 	{
-		training = new TimeTraining(length);
+		if(parseInt(difficulty) !== Math.NaN && difficulty !== undefined)
+			training = new TimeTraining(difficulty, length);
 	}
 	
 	return training;

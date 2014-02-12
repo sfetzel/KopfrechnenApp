@@ -1,19 +1,73 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"NmokTe":[function(require,module,exports){
+var SimpleExerciseFactory = require("./SimpleExerciseFactory");
+var util = require("util");
+
+function AdditionExerciseFactory()
+{
+	SimpleExerciseFactory.call(this);
+	this.operationSymbol = '+';
+}
+
+util.inherits(AdditionExerciseFactory, SimpleExerciseFactory);
+
+AdditionExerciseFactory.prototype.calculate = function(firstNumber, secondNumber)
+{
+	return firstNumber + secondNumber;
+}
+
+
+module.exports = AdditionExerciseFactory;
+
+},{"./SimpleExerciseFactory":6,"util":17}],"./AdditionExerciseFactory":[function(require,module,exports){
+module.exports=require('NmokTe');
+},{}],3:[function(require,module,exports){
+var EventEmitter = require("events").EventEmitter;
+var util = require("util");
+
+function Exercise(text, answer)
+{
+	this.text = text;
+	var expectedAnswer = answer;
+	var isCorrectAnswered = false;
+	
+	this.check = function(answer)
+	{
+		var correct = answer == expectedAnswer;
+		if(!isCorrectAnswered && correct)
+		{
+			isCorrectAnswered = true;
+			this.emit("answered");
+		}
+			
+		return correct;
+	}
+	
+	this.getIsCorrectAnswered = function()
+	{
+		return isCorrectAnswered;
+	}
+}
+
+util.inherits(Exercise, EventEmitter);
+
+module.exports = Exercise;
+
+},{"events":13,"util":17}],"9TUnR2":[function(require,module,exports){
 var SpecificExerciseFactory = require("./SpecificExerciseFactory");
 
 var specificExerciseFactories = [];
 
 module.exports =
 {
-	getRandomExercise: function()
+	getRandomExercise: function(difficulty)
 	{
 		if(specificExerciseFactories.length == 0)
 			throw "Cannot get random exercise because there are no factories registred";
-		
+	
 		var lastFactoryIndex = specificExerciseFactories.length;
 		var randomFactory = Math.floor((Math.random() * lastFactoryIndex));
 		
-		return specificExerciseFactories[randomFactory].getRandomExercise();
+		return specificExerciseFactories[randomFactory].getRandomExercise(difficulty);
 	},
 	
 	registerFactory: function(factory)
@@ -32,7 +86,49 @@ module.exports =
 	}
 }
 
-},{"./SpecificExerciseFactory":2}],2:[function(require,module,exports){
+},{"./SpecificExerciseFactory":7}],"./ExerciseFactory":[function(require,module,exports){
+module.exports=require('9TUnR2');
+},{}],6:[function(require,module,exports){
+var SpecificExerciseFactory = require("./SpecificExerciseFactory");
+var Exercise = require("./Exercise");
+var util = require("util");
+
+function SimpleExerciseFactory()
+{
+	SpecificExerciseFactory.call(this);
+}
+
+util.inherits(SimpleExerciseFactory, SpecificExerciseFactory);
+
+SimpleExerciseFactory.prototype.getFirstNumber = function(numberLength)
+{
+	var firstNumber = this.getRandomNumber(Math.pow(10, numberLength-1), Math.pow(10, numberLength));
+	return firstNumber;
+}
+
+SimpleExerciseFactory.prototype.getSecondNumber = function(numberLength, firstNumber)
+{
+	return this.getFirstNumber(numberLength);
+}
+
+SimpleExerciseFactory.prototype.getRandomExercise = function(difficulty)
+{
+	if(difficulty == undefined || parseInt(difficulty) == Math.NaN)
+		throw "difficulty argument missing";
+	
+	var numberLength = this.getNumberLength(difficulty);
+	var firstNumber = this.getFirstNumber(numberLength);
+	var secondNumber = this.getSecondNumber(numberLength, firstNumber);
+
+	var correctAnswer = this.calculate(firstNumber, secondNumber);
+
+	var exercise = new Exercise(firstNumber + this.operationSymbol.toString() + secondNumber, correctAnswer);
+	return exercise;
+}
+
+module.exports = SimpleExerciseFactory;
+
+},{"./Exercise":3,"./SpecificExerciseFactory":7,"util":17}],7:[function(require,module,exports){
 
 function SpecificExerciseFactory()
 {
@@ -77,13 +173,13 @@ SpecificExerciseFactory.prototype.getRandomExercise = function(difficulty)
 
 module.exports = SpecificExerciseFactory;
 
-},{}],3:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var Training = require("./Training");
 var util = require("util");
 
-function TimeTraining(durationTime)
+function TimeTraining(difficulty, durationTime)
 {
-	Training.call(this);
+	Training.call(this, difficulty);
 
 	if(parseInt(durationTime) == Math.NaN || durationTime == undefined || durationTime <= 0)
 		throw "durationTime missing";
@@ -108,7 +204,7 @@ util.inherits(TimeTraining, Training);
 
 module.exports = TimeTraining;
 
-},{"./Training":6,"util":12}],"./TimeTrainingConfiguration":[function(require,module,exports){
+},{"./Training":11,"util":17}],"./TimeTrainingConfiguration":[function(require,module,exports){
 module.exports=require('qdIHSi');
 },{}],"qdIHSi":[function(require,module,exports){
 var util = require("util");
@@ -120,14 +216,15 @@ function TimeTrainingConfiguration()
 	this.Length = 50;
 }
 
-TrainingConfiguration.prototype.create = function()
+TrainingConfiguration.prototype.create = function(difficulty)
 {
 	var training = undefined;
 	var length = parseInt(this.Length)
 	
-	if(length != Math.NaN)
+	if(length !== Math.NaN)
 	{
-		training = new TimeTraining(length);
+		if(parseInt(difficulty) !== Math.NaN)
+			training = new TimeTraining(difficulty, length);
 	}
 	
 	return training;
@@ -137,17 +234,20 @@ util.inherits(TimeTrainingConfiguration, TrainingConfiguration);
 
 module.exports = TimeTrainingConfiguration;
 
-},{"./TimeTraining":3,"./TrainingConfiguration":7,"util":12}],6:[function(require,module,exports){
+},{"./TimeTraining":8,"./TrainingConfiguration":12,"util":17}],11:[function(require,module,exports){
 var ExerciseFactory = require("./ExerciseFactory");
 var EventEmitter = require("events").EventEmitter;
 var util = require("util");
 
-function Training()
-{		
+function Training(difficulty)
+{
+	if(parseInt(difficulty) === Math.NaN)
+		throw "Difficulty argument missing";
+		
 	this.startTime = undefined;
 	this.stopTime = undefined;
 	this.exercisesDone = Array();
-	
+	this.Difficulty = difficulty;
 	var currentExercise = undefined;
 	var isDone = false;
 	
@@ -175,7 +275,7 @@ function Training()
 	
 	function createExercise()
 	{
-		var exercise = ExerciseFactory.getRandomExercise();
+		var exercise = ExerciseFactory.getRandomExercise(self.Difficulty);
 		exercise.on("answered", function()
 		{
 			self.exercisesDone.push(exercise);
@@ -205,10 +305,11 @@ util.inherits(Training, EventEmitter);
 
 module.exports = Training;
 
-},{"./ExerciseFactory":1,"events":8,"util":12}],7:[function(require,module,exports){
+},{"./ExerciseFactory":"9TUnR2","events":13,"util":17}],12:[function(require,module,exports){
 
 function TrainingConfiguration()
 {
+	this.Difficulty = 50;
 }
 
 TrainingConfiguration.prototype.create = function()
@@ -218,7 +319,7 @@ TrainingConfiguration.prototype.create = function()
 
 module.exports = TrainingConfiguration;
 
-},{}],8:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -520,7 +621,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],9:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -545,7 +646,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],10:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -600,14 +701,14 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],11:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],12:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var process=require("__browserify_process"),global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1195,4 +1296,4 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-},{"./support/isBuffer":11,"__browserify_process":10,"inherits":9}]},{},[])
+},{"./support/isBuffer":16,"__browserify_process":15,"inherits":14}]},{},[])

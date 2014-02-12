@@ -4,15 +4,15 @@ var specificExerciseFactories = [];
 
 module.exports =
 {
-	getRandomExercise: function()
+	getRandomExercise: function(difficulty)
 	{
 		if(specificExerciseFactories.length == 0)
 			throw "Cannot get random exercise because there are no factories registred";
-		
+	
 		var lastFactoryIndex = specificExerciseFactories.length;
 		var randomFactory = Math.floor((Math.random() * lastFactoryIndex));
 		
-		return specificExerciseFactories[randomFactory].getRandomExercise();
+		return specificExerciseFactories[randomFactory].getRandomExercise(difficulty);
 	},
 	
 	registerFactory: function(factory)

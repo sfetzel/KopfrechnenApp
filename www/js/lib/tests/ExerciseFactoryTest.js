@@ -28,8 +28,8 @@ module.exports =
 		var mockFactory = new MockSpecificExerciseFactory();
 		ExerciseFactory.registerFactory(mockFactory);
 		
-		var factoryExercise = ExerciseFactory.getRandomExercise();
-		var mockFactoryExercise = mockFactory.getRandomExercise();
+		var factoryExercise = ExerciseFactory.getRandomExercise(12);
+		var mockFactoryExercise = mockFactory.getRandomExercise(12);
 		
 		test.equal(factoryExercise.text, mockFactoryExercise.text);
 		

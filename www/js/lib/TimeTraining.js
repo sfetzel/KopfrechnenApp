@@ -1,9 +1,9 @@
 var Training = require("./Training");
 var util = require("util");
 
-function TimeTraining(durationTime)
+function TimeTraining(difficulty, durationTime)
 {
-	Training.call(this);
+	Training.call(this, difficulty);
 
 	if(parseInt(durationTime) == Math.NaN || durationTime == undefined || durationTime <= 0)
 		throw "durationTime missing";

@@ -11,7 +11,7 @@ module.exports =
 	testStart: function(test)
 	{
 		var length = 0.1;
-		var training = new TimeTraining(length);
+		var training = new TimeTraining(50, length);
 		
 		training.on("stop", function()
 		{

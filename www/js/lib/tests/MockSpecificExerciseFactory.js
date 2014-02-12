@@ -8,6 +8,8 @@ function MockSpecificExerciseFactory()
 	
 	this.getRandomExercise = function(difficulty)
 	{
+		if(difficulty === undefined)
+			throw "Difficulty argument missing";
 		var exercise = new Exercise("Find the corner of a circle!", this.theSolution);
 		return exercise;
 	}
