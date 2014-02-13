@@ -28,23 +28,33 @@ function Exercise(text, answer)
 {
 	this.text = text;
 	var expectedAnswer = answer;
-	var isCorrectAnswered = false;
+	var passedChecks = 0;
+	var checkCount = 0;
 	
 	this.check = function(answer)
 	{
+		checkCount++;
 		var correct = answer == expectedAnswer;
-		if(!isCorrectAnswered && correct)
-		{
-			isCorrectAnswered = true;
+		
+		// if exercise was correctly answered
+		// and not answered before then emit event
+		if(passedChecks == 0 && correct)
 			this.emit("answered");
-		}
+			
+		if(correct)
+			passedChecks++;
 			
 		return correct;
 	}
 	
-	this.getIsCorrectAnswered = function()
+	this.getPassedChecks = function()
 	{
-		return isCorrectAnswered;
+		return passedChecks;
+	}
+	
+	this.getCheckCount = function()
+	{
+		return checkCount;
 	}
 }
 

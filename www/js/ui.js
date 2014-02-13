@@ -60,6 +60,17 @@ angular.module('KopfrechnenApp', ['ngTouch']).service('TrainingService', functio
 			exerciseText = TrainingService.getTraining().getCurrentExercise().text;
 		return exerciseText;
 	};
+	
+	$scope.ShowMistakeHint = function(){
+		var show = false;
+		if(TrainingService.getTraining() !== undefined){
+			var currentExercise = TrainingService.getTraining().getCurrentExercise();
+			if(currentExercise.getCheckCount() > 0 && currentExercise.getPassedChecks() == 0){
+				show = true;
+			}
+		}
+		return show;
+	}
 
 	$scope.Cancel = function() {
 		TrainingService.uninitialize();

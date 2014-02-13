@@ -9,3 +9,8 @@ body
 	margin-bottom: 10px !important;
 	font-weight: bold;
 }
+
+.mistake
+{
+	border: 1px solid red;
+}
