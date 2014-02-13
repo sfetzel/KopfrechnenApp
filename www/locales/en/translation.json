@@ -5,6 +5,7 @@
 	},
 	"Training":
 	{
-		"Cancel": "Cancelx"
+		"Cancel": "Cancel",
+		"Clear": "Clear"
 	}
 }

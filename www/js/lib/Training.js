@@ -43,6 +43,7 @@ function Training(difficulty)
 		{
 			self.exercisesDone.push(exercise);
 			self.emit("exerciseDone", exercise);
+			currentExercise = undefined;
 		});
 		return exercise;
 	}

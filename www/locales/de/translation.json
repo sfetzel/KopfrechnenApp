@@ -5,6 +5,7 @@
 	},
 	"Training":
 	{
-		"Cancel": "Abbrechen"
+		"Cancel": "Abbrechen",
+		"Clear": "Leeren"
 	}
 }

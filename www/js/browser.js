@@ -18,7 +18,7 @@ AdditionExerciseFactory.prototype.calculate = function(firstNumber, secondNumber
 
 module.exports = AdditionExerciseFactory;
 
-},{"./SimpleExerciseFactory":6,"util":17}],"./AdditionExerciseFactory":[function(require,module,exports){
+},{"./SimpleExerciseFactory":6,"util":18}],"./AdditionExerciseFactory":[function(require,module,exports){
 module.exports=require('NmokTe');
 },{}],3:[function(require,module,exports){
 var EventEmitter = require("events").EventEmitter;
@@ -52,7 +52,7 @@ util.inherits(Exercise, EventEmitter);
 
 module.exports = Exercise;
 
-},{"events":13,"util":17}],"9TUnR2":[function(require,module,exports){
+},{"events":14,"util":18}],"9TUnR2":[function(require,module,exports){
 var SpecificExerciseFactory = require("./SpecificExerciseFactory");
 
 var specificExerciseFactories = [];
@@ -128,7 +128,7 @@ SimpleExerciseFactory.prototype.getRandomExercise = function(difficulty)
 
 module.exports = SimpleExerciseFactory;
 
-},{"./Exercise":3,"./SpecificExerciseFactory":7,"util":17}],7:[function(require,module,exports){
+},{"./Exercise":3,"./SpecificExerciseFactory":7,"util":18}],7:[function(require,module,exports){
 
 function SpecificExerciseFactory()
 {
@@ -173,7 +173,7 @@ SpecificExerciseFactory.prototype.getRandomExercise = function(difficulty)
 
 module.exports = SpecificExerciseFactory;
 
-},{}],8:[function(require,module,exports){
+},{}],"EMW8pn":[function(require,module,exports){
 var Training = require("./Training");
 var util = require("util");
 
@@ -185,13 +185,15 @@ function TimeTraining(difficulty, durationTime)
 		throw "durationTime missing";
 	
 	var self = this;
-	this.DurationTime = parseInt(durationTime);
-	
+	this.DurationTime = parseFloat(durationTime);
+
+	this.StopsAt = undefined;
 	var startFunction = this.start;
 	
 	this.start = function()
 	{
 		startFunction.call(this);
+		this.stopsAt = new Date(this.startTime.getTime() + self.DurationTime * 1000);
 		
 		setTimeout(function()
 		{
@@ -202,9 +204,28 @@ function TimeTraining(difficulty, durationTime)
 
 util.inherits(TimeTraining, Training);
 
+TimeTraining.prototype.getRemainingSeconds = function(referenceDate)
+{
+	var seconds = 0;
+	if(referenceDate  === undefined || typeof(referenceDate) !== "Date")
+		referenceDate = new Date();
+	
+	if(this.startTime !== undefined)
+	{
+		if(this.stopTime === undefined)
+		{
+			var timeDifference = this.stopsAt.getTime() - referenceDate.getTime();
+			return timeDifference / 1000;
+		}
+	}
+	return seconds;
+}
+
 module.exports = TimeTraining;
 
-},{"./Training":11,"util":17}],"./TimeTrainingConfiguration":[function(require,module,exports){
+},{"./Training":12,"util":18}],"./TimeTraining":[function(require,module,exports){
+module.exports=require('EMW8pn');
+},{}],"./TimeTrainingConfiguration":[function(require,module,exports){
 module.exports=require('qdIHSi');
 },{}],"qdIHSi":[function(require,module,exports){
 var util = require("util");
@@ -213,18 +234,17 @@ var TimeTraining = require("./TimeTraining");
 
 function TimeTrainingConfiguration()
 {
-	this.Length = 50;
+	this.Length = 60;
 }
 
 TrainingConfiguration.prototype.create = function(difficulty)
 {
 	var training = undefined;
-	var length = parseInt(this.Length)
 	
-	if(length !== Math.NaN)
+	if(parseInt(this.Length) !== Math.NaN && this.Length !== undefined)
 	{
-		if(parseInt(difficulty) !== Math.NaN)
-			training = new TimeTraining(difficulty, length);
+		if(parseInt(difficulty) !== Math.NaN && difficulty !== undefined)
+			training = new TimeTraining(difficulty, this.Length);
 	}
 	
 	return training;
@@ -234,7 +254,7 @@ util.inherits(TimeTrainingConfiguration, TrainingConfiguration);
 
 module.exports = TimeTrainingConfiguration;
 
-},{"./TimeTraining":8,"./TrainingConfiguration":12,"util":17}],11:[function(require,module,exports){
+},{"./TimeTraining":"EMW8pn","./TrainingConfiguration":13,"util":18}],12:[function(require,module,exports){
 var ExerciseFactory = require("./ExerciseFactory");
 var EventEmitter = require("events").EventEmitter;
 var util = require("util");
@@ -280,6 +300,7 @@ function Training(difficulty)
 		{
 			self.exercisesDone.push(exercise);
 			self.emit("exerciseDone", exercise);
+			currentExercise = undefined;
 		});
 		return exercise;
 	}
@@ -305,7 +326,7 @@ util.inherits(Training, EventEmitter);
 
 module.exports = Training;
 
-},{"./ExerciseFactory":"9TUnR2","events":13,"util":17}],12:[function(require,module,exports){
+},{"./ExerciseFactory":"9TUnR2","events":14,"util":18}],13:[function(require,module,exports){
 
 function TrainingConfiguration()
 {
@@ -319,7 +340,7 @@ TrainingConfiguration.prototype.create = function()
 
 module.exports = TrainingConfiguration;
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -621,7 +642,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -646,7 +667,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -701,14 +722,14 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 var process=require("__browserify_process"),global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1296,4 +1317,4 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-},{"./support/isBuffer":16,"__browserify_process":15,"inherits":14}]},{},[])
+},{"./support/isBuffer":17,"__browserify_process":16,"inherits":15}]},{},[])

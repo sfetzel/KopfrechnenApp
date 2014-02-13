@@ -14,7 +14,7 @@ TrainingConfiguration.prototype.create = function(difficulty)
 	if(parseInt(this.Length) !== Math.NaN && this.Length !== undefined)
 	{
 		if(parseInt(difficulty) !== Math.NaN && difficulty !== undefined)
-			training = new TimeTraining(difficulty, length);
+			training = new TimeTraining(difficulty, this.Length);
 	}
 	
 	return training;

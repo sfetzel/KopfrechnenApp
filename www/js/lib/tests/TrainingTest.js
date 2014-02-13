@@ -61,6 +61,9 @@ module.exports =
 		
 		test.notEqual(training.exercisesDone.indexOf(exercise), -1);
 		test.done();
+		
+		var newExercise = training.getCurrentExercise();
+		test.notEqual(exercise, newExercise);
 	},
 	
 	exerciseDoneEventRaised: function(test)
@@ -94,5 +97,5 @@ module.exports =
 		training.stop();
 		test.throws(function(){ training.getCurrentExercise(); });
 		test.done();
-	}	
+	}
 }

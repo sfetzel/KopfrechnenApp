@@ -9,13 +9,15 @@ function TimeTraining(difficulty, durationTime)
 		throw "durationTime missing";
 	
 	var self = this;
-	this.DurationTime = parseInt(durationTime);
-	
+	this.DurationTime = parseFloat(durationTime);
+
+	this.StopsAt = undefined;
 	var startFunction = this.start;
 	
 	this.start = function()
 	{
 		startFunction.call(this);
+		this.stopsAt = new Date(this.startTime.getTime() + self.DurationTime * 1000);
 		
 		setTimeout(function()
 		{
@@ -25,5 +27,22 @@ function TimeTraining(difficulty, durationTime)
 }
 
 util.inherits(TimeTraining, Training);
+
+TimeTraining.prototype.getRemainingSeconds = function(referenceDate)
+{
+	var seconds = 0;
+	if(referenceDate  === undefined || typeof(referenceDate) !== "Date")
+		referenceDate = new Date();
+	
+	if(this.startTime !== undefined)
+	{
+		if(this.stopTime === undefined)
+		{
+			var timeDifference = this.stopsAt.getTime() - referenceDate.getTime();
+			return timeDifference / 1000;
+		}
+	}
+	return seconds;
+}
 
 module.exports = TimeTraining;

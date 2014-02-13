@@ -1,14 +1,11 @@
-#WelcomePage
+body
 {
-	background-color: #2e5e14;
-	color: white;
+	padding-top: 60px;
 }
 
-#WelcomePage h1
+.keyboard-btn
 {
-}
-
-#WelcomePage span
-{
-
+	width: 100%;
+	margin-bottom: 10px !important;
+	font-weight: bold;
 }
