@@ -21,104 +21,12 @@
 
 	<div class="container theme-showcase" role="main">
 		<!-- Selection form for training mode -->
-		<div ng-controller="TrainingsController" ng-show="Show()">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h2 class="panel-title"><b>Schwierigkeit</b></h2>
-				</div>
-				<div class="panel-body">
-					<b>Stufe {{Difficulty}} / 100</b><br />
-					<div class="col-xs-4 text-right">leicht</div>
-					<div class="col-xs-4">
-				   	<input class="inline" type="range" min="1" max="100" step="5" ng-model="Difficulty" />
-				   	</div>
-					<div class="col-xs-4 text-left">schwer</div>
-				</div>
-			</div>
-		
-			<div class="col-sm-4">
-				<div class="panel panel-success">
-					<div class="panel-heading">
-						<h3 class="panel-title">Zeittraining</h3>
-					</div>
-					<div class="panel-body">
-						Lösen Sie innerhalb von <b>{{TimeTrainingConfiguration.Length}} Sekunden</b>
-						so viele Aufgaben wie möglich.
-						<input id="TimeSlider" type="range" name="slider" min="10" max="200" step="10"
-							data-highlight="false" data-theme="e" ng-model="TimeTrainingConfiguration.Length">
-						
-						<br />
-						<!-- form for training with time span -->
-						<button class="btn btn-lg btn-default"	ng-click="StartTimeTraining()">Zeittraining starten</button>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-sm-4">
-				<!-- form for training with maximum number of exercises -->
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<h3 class="panel-title">Aufgabentraining</h3>
-					</div>
-					<div class="panel-body">
-						Lösen Sie <b>{{CountTraining.Count}} Aufgaben
-						<input id="CountSlider" type="range" name="slider" value="50" min="10" max="120" step="10"
-							data-highlight="false" data-theme="e" ng-model="CountTraining.Count">
-	    
-						<button disabled class="btn btn-lg btn-default"	ng-click="StartTimeTraining()">Aufgabentraining starten</button>				
-					</div>
-				</div>
-			</div>
-
-		</div>
+		<div ng-include="'views/Training.html'"></div>
 		
 		<!-- Training mode -->
-		<div ng-controller="ExerciseController" ng-show="Show()">
-			<h1 style="text-center">
-				{{getExercise()}} =
-				<input id="SolutionInput" placeholder="" ng-model="solution" type="number"
-					style="font-size: 1em; font-weight: bold;" ng-class="{ 'mistake': ShowMistakeHint() }">
-			</h1>
-			
-			<!-- number buttons -->
-			<div class="col-xs-4">
-				<button type="button" class="btn btn-lg btn-danger keyboard-btn" ng-click="Cancel()" data-i18n="Training.Cancel">Cancel</button>
-				<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(1)">1</button><br />
-				<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(4)">4</button><br />
-				<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(7)">7</button><br />
-			</div>
-			
-			<div class="col-xs-4">
-				<button type="button" class="btn btn-lg btn-info keyboard-btn" ng-click="Clear()">Clear</button>
-				<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(2)">2</button><br />
-				<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(5)">5</button><br />
-				<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(8)">8</button><br />
-				<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(0)">0</button>
-			</div>
-			
-			<div class="col-xs-4">
-				<button type="button" class="btn btn-lg btn-success keyboard-btn" ng-click="Next()">Next</button>
-				<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(3)">3</button><br />
-				<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(6)">6</button><br />
-				<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(9)">9</button><br />
-			</div>
-			
-			<div class="clearfix">&nbsp;</div>
-			<div ng-show="IsTimeTraining()">
-				Zeit:
-				{{remainingSeconds}} Sekunden
-				
-				<div class="progress">
-					<div class="progress-bar" role="progressbar" aria-valuenow="{{remainingSeconds}}" aria-valuemin="0"
-						ng-style="{ width : ( timePercentage + '%' ) }" aria-valuemax="100"><span class="sr-only">60% Complete</span></div>
-				</div>
-			</div>
-		</div>
+		<div ng-include="'views/Exercise.html'"></div>
 	</div>
-</div>
 	
-	
-
 	<!--
 	Cordova plugin is not needed at the moment
 	 --->	
@@ -126,19 +34,25 @@
 <!--        <script type="text/javascript" src="js/index.js"></script>-->
         
         
+    <!--
     <script type="text/javascript" src="res/vendor/i18next/i18next-1.7.1.js"></script>
-        
-        <!--<script type="text/javascript">
+    <script type="text/javascript">
 	i18n.init(function(t) {
 		$("body").i18n();
 	});
    	</script>
    	-->
+   	
 	<!-- angluar backend -->
 	<script type="text/javascript" src="res/vendor/angularjs/angular.js"></script>
 	<script type="text/javascript" src="res/vendor/angularjs/angular-touch.js"></script>
 	<!-- load library -->
 	<script type="text/javascript" src="js/browser.js"></script>
-	<script type="text/javascript" src="js/ui.js"></script>
+	<script type="text/javascript" src="js/TrainingService.js"></script>
+	
+	<script type="text/javascript" src="controller/TrainingController.js"></script>
+	<script type="text/javascript" src="controller/TimeTrainingController.js"></script>
+	
+	<script type="text/javascript" src="controller/ExerciseController.js"></script>
 </body>
 </html>

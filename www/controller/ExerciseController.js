@@ -1,36 +1,5 @@
-var TimeTrainingConfiguration = require("./TimeTrainingConfiguration");
-var TimeTraining = require("./TimeTraining");
-var ExerciseFactory = require("./ExerciseFactory");
-var AdditionExerciseFactory = require("./AdditionExerciseFactory");
-
-ExerciseFactory.registerFactory(new AdditionExerciseFactory());
-
-angular.module('KopfrechnenApp', ['ngTouch']).service('TrainingService', function ()
-{
-	var training = undefined;
-	var trainingDifficulty = 50;
-	
-	var TrainingModeService = 
-    {
-    	initialize: function(TrainingConfiguration, difficulty)
-    	{
-			training = TrainingConfiguration.create(difficulty);
-    	},
-    	
-    	uninitialize: function()
-    	{
-    		training = undefined;
-    	},
-    	
-    	getTraining: function()
-    	{
-    		return training;
-    	}
-    };
-    
-   return TrainingModeService;
-	
-}).controller('ExerciseController', ["$scope", "$timeout", "TrainingService", function($scope, $timeout, TrainingService)
+angular.module('KopfrechnenApp').controller('ExerciseController', ["$scope", "$timeout", "TrainingService",
+function($scope, $timeout, TrainingService)
 {
 	$scope.solution = undefined;
 	
@@ -108,24 +77,6 @@ angular.module('KopfrechnenApp', ['ngTouch']).service('TrainingService', functio
 		return seconds;
 	}
 	
-}]).controller('TrainingsController', ["$scope", "TrainingService", function ($scope, TrainingService)
-{
-	$scope.Difficulty = 35;
-  
-	$scope.TimeTrainingConfiguration = new TimeTrainingConfiguration();
-	//$scope.CountTrainingConfiguration = new CountTrainingConfiguration();
-	
-	
-	$scope.Show = function() {
-		return (TrainingService.getTraining() === undefined);
-	}
-	
-	$scope.StartTimeTraining = function() {
-		TrainingService.initialize($scope.TimeTrainingConfiguration, $scope.Difficulty);
-	}
-	
-	$scope.StartCountTraining = function()
-	{
-		
-	}
-}]);
+}])
+
+
