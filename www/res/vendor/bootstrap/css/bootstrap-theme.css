@@ -29,10 +29,10 @@
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
           box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
-.btn:active,
+/*.btn:active,
 .btn.active {
   background-image: none;
-}
+}*/
 .btn-default {
   text-shadow: 0 1px 0 #fff;
   background-image: -webkit-linear-gradient(top, #fff 0%, #e0e0e0 100%);
@@ -43,16 +43,16 @@
   border-color: #dbdbdb;
   border-color: #ccc;
 }
-.btn-default:hover,
+/*.btn-default:hover,
 .btn-default:focus {
   background-color: #e0e0e0;
   background-position: 0 -15px;
-}
-.btn-default:active,
+}*/
+/*.btn-default:active,
 .btn-default.active {
   background-color: #e0e0e0;
   border-color: #dbdbdb;
-}
+}*/
 .btn-primary {
   background-image: -webkit-linear-gradient(top, #428bca 0%, #2d6ca2 100%);
   background-image:         linear-gradient(to bottom, #428bca 0%, #2d6ca2 100%);
@@ -79,7 +79,7 @@
   background-repeat: repeat-x;
   border-color: #3e8f3e;
 }
-.btn-success:hover,
+/*.btn-success:hover,
 .btn-success:focus {
   background-color: #419641;
   background-position: 0 -15px;
@@ -88,7 +88,7 @@
 .btn-success.active {
   background-color: #419641;
   border-color: #3e8f3e;
-}
+}*/
 .btn-info {
   background-image: -webkit-linear-gradient(top, #5bc0de 0%, #2aabd2 100%);
   background-image:         linear-gradient(to bottom, #5bc0de 0%, #2aabd2 100%);
@@ -97,7 +97,7 @@
   background-repeat: repeat-x;
   border-color: #28a4c9;
 }
-.btn-info:hover,
+/*.btn-info:hover,
 .btn-info:focus {
   background-color: #2aabd2;
   background-position: 0 -15px;
@@ -106,7 +106,7 @@
 .btn-info.active {
   background-color: #2aabd2;
   border-color: #28a4c9;
-}
+}*/
 .btn-warning {
   background-image: -webkit-linear-gradient(top, #f0ad4e 0%, #eb9316 100%);
   background-image:         linear-gradient(to bottom, #f0ad4e 0%, #eb9316 100%);
@@ -133,7 +133,7 @@
   background-repeat: repeat-x;
   border-color: #b92c28;
 }
-.btn-danger:hover,
+/*.btn-danger:hover,
 .btn-danger:focus {
   background-color: #c12e2a;
   background-position: 0 -15px;
@@ -142,7 +142,7 @@
 .btn-danger.active {
   background-color: #c12e2a;
   border-color: #b92c28;
-}
+}*/
 .thumbnail,
 .img-thumbnail {
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
