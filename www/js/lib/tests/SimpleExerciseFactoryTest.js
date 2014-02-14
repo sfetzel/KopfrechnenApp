@@ -10,7 +10,7 @@ module.exports =
 
 		var exercise = factory.getRandomExercise(difficulty);
 		
-		var numberLength = factory.getNumberLength(difficulty);
+		var maximumNumber = factory.getMaximumNumber(difficulty);
 		test.notEqual(exercise, undefined);
 		
 		// check numbers
@@ -21,10 +21,8 @@ module.exports =
 		test.notEqual(firstNumber, Math.NaN);
 		test.notEqual(secondNumber, Math.NaN);
 		
-		test.ok(firstNumber >= Math.pow(10,numberLength-1));
-		test.ok(firstNumber <= Math.pow(10, numberLength));
-		test.ok(secondNumber >= Math.pow(10,numberLength-1));
-		test.ok(secondNumber <= Math.pow(10, numberLength));
+		test.ok(firstNumber <= maximumNumber);
+		test.ok(secondNumber <= maximumNumber);
 		
 		test.ok(exercise.check(firstNumber+secondNumber));
 		
@@ -37,7 +35,7 @@ module.exports =
 		var factory = new MockSimpleExerciseFactory();
 		var exercise = factory.getRandomExercise(difficulty);
 		
-		var numberLength = factory.getNumberLength(difficulty);
+		var maximumNumber = factory.getMaximumNumber(difficulty);
 		test.notEqual(exercise, undefined);
 		
 		// check numbers
@@ -50,7 +48,7 @@ module.exports =
 		
 		var difference = Math.abs(firstNumber-secondNumber);
 		
-		test.ok(difference < 10^numberLength);
+		test.ok(difference < maximumNumber);
 		
 		test.done();
 	},

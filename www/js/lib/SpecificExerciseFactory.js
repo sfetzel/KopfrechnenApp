@@ -1,16 +1,33 @@
+var ExerciseFactoryConfiguration = require("./ExerciseFactoryConfiguration");
 
 function SpecificExerciseFactory()
 {
-	this.getNumberLength = function(difficulty)
+	this.getMaximumNumber = function(difficulty)
 	{
-		var numberLength = undefined;
+		var maximumNumber = undefined;
 		
 		if(difficulty > 0)
 		{
-			numberLength = Math.floor(4 / 100 * difficulty) + 1;
+			maximumNumber = 10*difficulty;
 		}
 		
-		return numberLength;
+		return maximumNumber;
+	}
+	
+	this.getMinimumNumber = function(difficulty)
+	{
+		var minimumNumber = undefined;
+		
+		if(difficulty > 0)
+		{
+			var maximumNumber = this.getMaximumNumber(difficulty);
+			if(maximumNumber < 50)
+				minimumNumber = 0;
+			else
+				minimumNumber = maximumNumber - Math.floor(maximumNumber*0.5);
+		}
+		
+		return minimumNumber;
 	}
 	
 	this.getRandomNumber = function(start, maximum)

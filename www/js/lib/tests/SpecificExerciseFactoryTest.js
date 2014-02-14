@@ -1,22 +1,14 @@
 var SpecificExerciseFactory = require("../SpecificExerciseFactory");
+var ExerciseFactoryConfiguration = require("../ExerciseFactoryConfiguration");
 
 module.exports = 
 {
-	testGetNumberLengthInvalidArgument: function(test)
+	testGetMaximumNumberInvalidArgument: function(test)
 	{
 		var factory = new SpecificExerciseFactory();
-		var result = factory.getNumberLength(-1);
+		var result = factory.getMaximumNumber(-1);
 		
 		test.equal(result, undefined);
-		test.done();
-	},
-	
-	testGetNumberLengthInvalidArgument: function(test)
-	{
-		var factory = new SpecificExerciseFactory();
-		var result = factory.getNumberLength(50);
-		
-		test.equal(result, 3);
 		test.done();
 	},
 	
@@ -63,6 +55,18 @@ module.exports =
 	{
 		var factory = new SpecificExerciseFactory();
 		test.throws(function(){ factory.getRandomExercise(); });
+		test.done();
+	},
+	
+	testGetMinimumNumber: function(test)
+	{
+		var factory = new SpecificExerciseFactory();
+		test.ok(factory.getMinimumNumber(1) >= 0);
+		
+		var maximumNumber = factory.getMaximumNumber(1);
+		var minimumNumber = factory.getMinimumNumber(1);
+		
+		test.ok(minimumNumber < maximumNumber);
 		test.done();
 	}
 }

@@ -9,6 +9,11 @@ function MultiplicationExerciseFactory()
 
 util.inherits(MultiplicationExerciseFactory, SimpleExerciseFactory);
 
+MultiplicationExerciseFactory.prototype.getSecondNumber = function(maximumNumber, firstNumber)
+{
+	return this.getRandomNumber(1, Math.round(maximumNumber/10));
+}
+
 MultiplicationExerciseFactory.prototype.calculate = function(firstNumber, secondNumber)
 {
 	return firstNumber * secondNumber;

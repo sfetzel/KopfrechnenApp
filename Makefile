@@ -6,6 +6,7 @@ test:
 
 browser:
 	cd $(LIB); browserify -r ./TimeTrainingConfiguration -r ./ExerciseFactory \
-	-r ./AdditionExerciseFactory -r ./TimeTraining -o ../browser.js
+	-r ./AdditionExerciseFactory -r ./TimeTraining -r ./SpecificExerciseFactory \
+	-r ./SubtractionExerciseFactory -r ./MultiplicationExerciseFactory -o ../browser.js
 
 

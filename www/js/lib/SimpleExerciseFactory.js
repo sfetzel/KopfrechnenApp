@@ -9,15 +9,16 @@ function SimpleExerciseFactory()
 
 util.inherits(SimpleExerciseFactory, SpecificExerciseFactory);
 
-SimpleExerciseFactory.prototype.getFirstNumber = function(numberLength)
+SimpleExerciseFactory.prototype.getFirstNumber = function(maximumNumber)
 {
-	var firstNumber = this.getRandomNumber(Math.pow(10, numberLength-1), Math.pow(10, numberLength));
+	var halfMaxNumber = Math.round(maximumNumber/2);
+	var firstNumber = this.getRandomNumber(halfMaxNumber, maximumNumber);
 	return firstNumber;
 }
 
-SimpleExerciseFactory.prototype.getSecondNumber = function(numberLength, firstNumber)
+SimpleExerciseFactory.prototype.getSecondNumber = function(maximumNumber, firstNumber)
 {
-	return this.getFirstNumber(numberLength);
+	return firstNumber + this.getFirstNumber(maximumNumber);
 }
 
 SimpleExerciseFactory.prototype.getRandomExercise = function(difficulty)
@@ -25,9 +26,14 @@ SimpleExerciseFactory.prototype.getRandomExercise = function(difficulty)
 	if(difficulty == undefined || parseInt(difficulty) == Math.NaN)
 		throw "difficulty argument missing";
 	
-	var numberLength = this.getNumberLength(difficulty);
-	var firstNumber = this.getFirstNumber(numberLength);
-	var secondNumber = this.getSecondNumber(numberLength, firstNumber);
+	var maximumNumber = this.getMaximumNumber(difficulty);
+	var minimumNumber = this.getMinimumNumber(difficulty);
+	
+	var randomNumber = this.getRandomNumber(minimumNumber, maximumNumber);
+	var halfRandomMaxNumber = Math.round(randomNumber/2);
+	
+	var firstNumber = this.getFirstNumber(halfRandomMaxNumber);
+	var secondNumber = this.getSecondNumber(halfRandomMaxNumber, firstNumber);
 
 	var correctAnswer = this.calculate(firstNumber, secondNumber);
 
