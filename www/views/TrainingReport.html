@@ -1,0 +1,10 @@
+<div ng-controller="TrainingReportController" ng-show="Show()">
+	<h1>Training beendet!</h1>
+	<b>Zeit:</b> {{getReport().StartTime|date:'mediumTime'}} bis {{getReport().StopTime|date:'mediumTime'}}<br />
+	<b>Dauer:</b> {{getReport().Duration}} Sekunden<br />
+	<b>Aufgaben:</b> {{getReport().ExercisesCount}}<br />
+	<b>Zeit pro Aufgabe:</b> {{getReport().TimePerExercise}}s<br />
+	<b>falsche Antworten:</b> {{getReport().WrongAnswersCount}} / {{getReport().AnswersCount}}
+	
+	<button class="btn btn-lg btn-default"	ng-click="Destroy()">Gelesen</button>
+</div>

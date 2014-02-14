@@ -1,4 +1,6 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"NmokTe":[function(require,module,exports){
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./AdditionExerciseFactory":[function(require,module,exports){
+module.exports=require('NmokTe');
+},{}],"NmokTe":[function(require,module,exports){
 var SimpleExerciseFactory = require("./SimpleExerciseFactory");
 var util = require("util");
 
@@ -18,9 +20,7 @@ AdditionExerciseFactory.prototype.calculate = function(firstNumber, secondNumber
 
 module.exports = AdditionExerciseFactory;
 
-},{"./SimpleExerciseFactory":9,"util":24}],"./AdditionExerciseFactory":[function(require,module,exports){
-module.exports=require('NmokTe');
-},{}],3:[function(require,module,exports){
+},{"./SimpleExerciseFactory":9,"util":26}],3:[function(require,module,exports){
 var EventEmitter = require("events").EventEmitter;
 var util = require("util");
 
@@ -62,7 +62,9 @@ util.inherits(Exercise, EventEmitter);
 
 module.exports = Exercise;
 
-},{"events":20,"util":24}],"9TUnR2":[function(require,module,exports){
+},{"events":22,"util":26}],"./ExerciseFactory":[function(require,module,exports){
+module.exports=require('9TUnR2');
+},{}],"9TUnR2":[function(require,module,exports){
 var SpecificExerciseFactory = require("./SpecificExerciseFactory");
 
 var specificExerciseFactories = [];
@@ -96,9 +98,7 @@ module.exports =
 	}
 }
 
-},{"./SpecificExerciseFactory":"5XhwFI"}],"./ExerciseFactory":[function(require,module,exports){
-module.exports=require('9TUnR2');
-},{}],6:[function(require,module,exports){
+},{"./SpecificExerciseFactory":"5XhwFI"}],6:[function(require,module,exports){
 module.exports =
 {
 	// Todo: put in configuration
@@ -132,7 +132,7 @@ MultiplicationExerciseFactory.prototype.calculate = function(firstNumber, second
 
 module.exports = MultiplicationExerciseFactory;
 
-},{"./SimpleExerciseFactory":9,"util":24}],9:[function(require,module,exports){
+},{"./SimpleExerciseFactory":9,"util":26}],9:[function(require,module,exports){
 var SpecificExerciseFactory = require("./SpecificExerciseFactory");
 var Exercise = require("./Exercise");
 var util = require("util");
@@ -178,7 +178,7 @@ SimpleExerciseFactory.prototype.getRandomExercise = function(difficulty)
 
 module.exports = SimpleExerciseFactory;
 
-},{"./Exercise":3,"./SpecificExerciseFactory":"5XhwFI","util":24}],"5XhwFI":[function(require,module,exports){
+},{"./Exercise":3,"./SpecificExerciseFactory":"5XhwFI","util":26}],"5XhwFI":[function(require,module,exports){
 var ExerciseFactoryConfiguration = require("./ExerciseFactoryConfiguration");
 
 function SpecificExerciseFactory()
@@ -270,9 +270,7 @@ SimpleExerciseFactory.prototype.getSecondNumber = function(maximumNumber, firstN
 
 module.exports = SubtractionExerciseFactory;
 
-},{"./SimpleExerciseFactory":9,"util":24}],"./TimeTraining":[function(require,module,exports){
-module.exports=require('EMW8pn');
-},{}],"EMW8pn":[function(require,module,exports){
+},{"./SimpleExerciseFactory":9,"util":26}],"EMW8pn":[function(require,module,exports){
 var Training = require("./Training");
 var util = require("util");
 
@@ -322,8 +320,8 @@ TimeTraining.prototype.getRemainingSeconds = function(referenceDate)
 
 module.exports = TimeTraining;
 
-},{"./Training":18,"util":24}],"./TimeTrainingConfiguration":[function(require,module,exports){
-module.exports=require('qdIHSi');
+},{"./Training":18,"util":26}],"./TimeTraining":[function(require,module,exports){
+module.exports=require('EMW8pn');
 },{}],"qdIHSi":[function(require,module,exports){
 var util = require("util");
 var TrainingConfiguration = require("./TrainingConfiguration");
@@ -351,7 +349,9 @@ util.inherits(TimeTrainingConfiguration, TrainingConfiguration);
 
 module.exports = TimeTrainingConfiguration;
 
-},{"./TimeTraining":"EMW8pn","./TrainingConfiguration":19,"util":24}],18:[function(require,module,exports){
+},{"./TimeTraining":"EMW8pn","./TrainingConfiguration":19,"util":26}],"./TimeTrainingConfiguration":[function(require,module,exports){
+module.exports=require('qdIHSi');
+},{}],18:[function(require,module,exports){
 var ExerciseFactory = require("./ExerciseFactory");
 var EventEmitter = require("events").EventEmitter;
 var util = require("util");
@@ -423,7 +423,7 @@ util.inherits(Training, EventEmitter);
 
 module.exports = Training;
 
-},{"./ExerciseFactory":"9TUnR2","events":20,"util":24}],19:[function(require,module,exports){
+},{"./ExerciseFactory":"9TUnR2","events":22,"util":26}],19:[function(require,module,exports){
 
 function TrainingConfiguration()
 {
@@ -437,7 +437,50 @@ TrainingConfiguration.prototype.create = function()
 
 module.exports = TrainingConfiguration;
 
-},{}],20:[function(require,module,exports){
+},{}],"./TrainingReport":[function(require,module,exports){
+module.exports=require('ccLtbf');
+},{}],"ccLtbf":[function(require,module,exports){
+var Training = require("./Training");
+
+
+function TrainingReport(training)
+{
+	if(training == undefined)
+		throw "Training argument missing";
+	
+	if(!(training instanceof Training))
+		throw "Training must be instance of Training prototype";
+	
+	if(training.stopTime === undefined)
+		throw "Training must be finished to create report";
+		
+	this.Training = training;
+
+	this.StartTime = training.startTime;
+	this.StopTime = training.stopTime;
+	this.Duration = Math.round((training.stopTime.getTime() - training.startTime.getTime()) / 100) / 10;
+	
+	if(training.exercisesDone !== undefined)
+		this.ExercisesCount = training.exercisesDone.length;
+	this.Difficulty = training.Difficulty;
+	this.TimePerExercise = Math.round(this.Duration / this.ExercisesCount * 10) / 10;
+	
+	this.WrongAnswersCount = 0;
+	this.AnswersCount = 0;
+	
+	var exercise = undefined;
+	for(var key in training.exercisesDone)
+	{
+		exercise = training.exercisesDone[key];
+		this.WrongAnswersCount += exercise.getCheckCount() - exercise.getPassedChecks();
+		this.AnswersCount += exercise.getCheckCount();
+	}
+	
+}
+
+module.exports = TrainingReport;
+
+},{"./Training":18}],22:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -739,7 +782,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -764,7 +807,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],22:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -819,14 +862,14 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],23:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],24:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 var process=require("__browserify_process"),global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1414,4 +1457,4 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-},{"./support/isBuffer":23,"__browserify_process":22,"inherits":21}]},{},[])
+},{"./support/isBuffer":25,"__browserify_process":24,"inherits":23}]},{},[])

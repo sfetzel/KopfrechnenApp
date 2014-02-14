@@ -1,4 +1,4 @@
 KopfrechnenApp
 ==============
 
-Testprojekt mit AngularJS, Nodeunit, Apache Cordova und jquery-mobile
+Testprojekt mit AngularJS, Nodeunit, Apache Cordova, Bootstrap
