@@ -12,7 +12,7 @@ ExerciseFactory.registerFactory(new AdditionExerciseFactory());
 ExerciseFactory.registerFactory(new SubtractionExerciseFactory());
 ExerciseFactory.registerFactory(new MultiplicationExerciseFactory());
 
-var KopfrechnenApp = angular.module('KopfrechnenApp', ['ngTouch']).service('TrainingService', function ()
+angular.module('KopfrechnenApp').service('TrainingService', function ()
 {
 	var training = undefined;
 	var trainingDifficulty = 50;

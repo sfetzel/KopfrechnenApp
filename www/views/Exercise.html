@@ -1,19 +1,19 @@
-<div ng-controller="ExerciseController" ng-show="Show()">
-	<h1 style="text-center">
+<div ng-controller="ExerciseController">
+	<h1 style="text-center" ng-init="$scope.init()">
 		{{getExercise()}} =
 		<input id="SolutionInput" placeholder="" ng-model="solution" type="number"
-			style="font-size: 1em; font-weight: bold;" ng-class="{ 'mistake': ShowMistakeHint() }">
+			style="font-size: 1em; font-weight: bold; width: 100%;" ng-class="{ 'mistake': ShowMistakeHint }">
 	</h1>
 
 	<!-- number buttons -->
-	<div class="col-xs-4">
+	<div class="col-xs-4 nopadding">
 		<button type="button" class="btn btn-lg btn-danger keyboard-btn" ng-click="Cancel()" data-i18n="Training.Cancel">Cancel</button>
 		<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(1)">1</button><br />
 		<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(4)">4</button><br />
 		<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(7)">7</button><br />
 	</div>
 
-	<div class="col-xs-4">
+	<div class="col-xs-4 nopadding">
 		<button type="button" class="btn btn-lg btn-info keyboard-btn" ng-click="Clear()">Clear</button>
 		<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(2)">2</button><br />
 		<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(5)">5</button><br />
@@ -21,7 +21,7 @@
 		<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(0)">0</button>
 	</div>
 
-	<div class="col-xs-4">
+	<div class="col-xs-4 nopadding">
 		<button type="button" class="btn btn-lg btn-success keyboard-btn" ng-click="Next()">Next</button>
 		<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(3)">3</button><br />
 		<button type="button" class="btn btn-lg btn-default keyboard-btn" ng-click="AddNumber(6)">6</button><br />
@@ -29,7 +29,7 @@
 	</div>
 
 	<div class="clearfix">&nbsp;</div>
-	<div ng-show="IsTimeTraining()">
+	<div ng-show="IsTimeTraining">
 		Zeit:
 		{{remainingSeconds}} Sekunden
 	

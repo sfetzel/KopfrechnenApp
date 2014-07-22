@@ -13,9 +13,4 @@ function ($scope, TrainingService)
 	$scope.getMaximumNumber = function(){
 		return factory.getMaximumNumber($scope.Difficulty);
 	}
-  
-	$scope.Show = function() {
-		return (TrainingService.getTraining() === undefined) &&
-			(TrainingService.getTrainingReport() === undefined);
-	}
 }]);

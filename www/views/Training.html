@@ -1,4 +1,4 @@
-<div ng-controller="TrainingController" ng-show="Show()">
+<div ng-controller="TrainingController">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h2 class="panel-title"><b>Schwierigkeit</b></h2>
@@ -9,37 +9,40 @@
 		</div>
 	</div>
 	
-
-	<div class="col-sm-4">
-		<div class="panel panel-success">
-			<div class="panel-heading">
-				<h3 class="panel-title">Zeittraining</h3>
-			</div>
-			<div class="panel-body" ng-controller="TimeTrainingController">
-				Lösen Sie innerhalb von <b>{{TimeTrainingConfiguration.Length}} Sekunden</b>
-				so viele Aufgaben wie möglich.
-				<input id="TimeSlider" type="range" name="slider" min="10" max="200" step="10"
-					data-highlight="false" data-theme="e" ng-model="TimeTrainingConfiguration.Length">
+	<div class="nopadding" style="overflow-x: scroll">
+		<div style="width: 800px" class="nopadding">
+			<div class="col-xs-4">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h3 class="panel-title">Zeittraining</h3>
+					</div>
+					<div class="panel-body" ng-controller="TimeTrainingController">
+						Lösen Sie innerhalb von <b>{{TimeTrainingConfiguration.Length}} Sekunden</b>
+						so viele Aufgaben wie möglich.
+						<input id="TimeSlider" type="range" name="slider" min="10" max="200" step="10"
+							data-highlight="false" data-theme="e" ng-model="TimeTrainingConfiguration.Length">
 				
-				<br />
-				<!-- form for training with time span -->
-				<button class="btn btn-lg btn-default"	ng-click="StartTimeTraining()">Zeittraining starten</button>
+						<br />
+						<!-- form for training with time span -->
+						<button class="btn btn-lg btn-default"	ng-click="StartTimeTraining()">Zeittraining starten</button>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
 	
-	<div class="col-sm-4">
-		<!-- form for training with maximum number of exercises -->
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h3 class="panel-title">Aufgabentraining</h3>
-			</div>
-			<div class="panel-body">
-				Lösen Sie <b>{{CountTraining.Count}} Aufgaben
-				<input id="CountSlider" type="range" name="slider" value="50" min="10" max="120" step="10"
-					data-highlight="false" data-theme="e" ng-model="CountTraining.Count">
+			<div class="col-xs-4">
+				<!-- form for training with maximum number of exercises -->
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Aufgabentraining</h3>
+					</div>
+					<div class="panel-body">
+						Lösen Sie <b>{{CountTraining.Count}} Aufgaben
+						<input id="CountSlider" type="range" name="slider" value="50" min="10" max="120" step="10"
+							data-highlight="false" data-theme="e" ng-model="CountTraining.Count">
 
-				<button disabled class="btn btn-lg btn-default"	ng-click="StartTimeTraining()">Aufgabentraining starten</button>				
+						<button disabled class="btn btn-lg btn-default"	ng-click="StartTimeTraining()">Aufgabentraining starten</button>				
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

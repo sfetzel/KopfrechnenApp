@@ -14,3 +14,8 @@ body
 {
 	border: 1px solid red;
 }
+
+.nopadding
+{
+	padding: 0 !important;
+}

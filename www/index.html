@@ -3,11 +3,12 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="format-detection" content="telephone=no" />
-	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
 	<link rel="stylesheet" type="text/css" href="res/vendor/bootstrap/css/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" href="res/vendor/bootstrap/css/bootstrap-theme.css" />
+	<link rel="stylesheet" type="text/css" href="res/vendor/bootstrap/css/bootstrap-responsive.css" />
+<!--	<link rel="stylesheet" type="text/css" href="res/vendor/bootstrap/css/bootstrap-theme.css" /> -->
 
 	<title>Kopfrechnen</title>
 </head>
@@ -19,21 +20,14 @@
 		</div>
 	</div>
 
-	<div class="container theme-showcase" role="main">
-		<!-- Selection form for training mode -->
-		<div ng-include="'views/Training.html'"></div>
-		
-		<!-- Training mode -->
-		<div ng-include="'views/Exercise.html'"></div>
-		
-		<!-- Training report -->
-		<div ng-include="'views/TrainingReport.html'"></div>
+	<div role="main">
+		<div ng-view=""></div>
 	</div>
 	
 	<!--
 	Cordova plugin is not needed at the moment
 	 --->	
-<!--        <script type="text/javascript" src="cordova.js"></script>-->
+<!--        <scrpt type="text/javascript" src="cordova.js"></script>-->
 <!--        <script type="text/javascript" src="js/index.js"></script>-->
         
         
@@ -48,9 +42,11 @@
    	
 	<!-- angluar backend -->
 	<script type="text/javascript" src="res/vendor/angularjs/angular.js"></script>
+	<script type="text/javascript" src="res/vendor/angularjs/angular-route.js"></script>
 	<script type="text/javascript" src="res/vendor/angularjs/angular-touch.js"></script>
 	<!-- load library -->
 	<script type="text/javascript" src="js/browser.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/TrainingService.js"></script>
 	
 	<script type="text/javascript" src="controller/TrainingController.js"></script>
