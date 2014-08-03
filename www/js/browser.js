@@ -1,6 +1,6 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./AdditionExerciseFactory":[function(require,module,exports){
-module.exports=require('NmokTe');
-},{}],"NmokTe":[function(require,module,exports){
+module.exports=require('/Pany1');
+},{}],"/Pany1":[function(require,module,exports){
 var SimpleExerciseFactory = require("./SimpleExerciseFactory");
 var util = require("util");
 
@@ -20,7 +20,47 @@ AdditionExerciseFactory.prototype.calculate = function(firstNumber, secondNumber
 
 module.exports = AdditionExerciseFactory;
 
-},{"./SimpleExerciseFactory":9,"util":26}],3:[function(require,module,exports){
+},{"./SimpleExerciseFactory":11,"util":28}],"./DivisionExerciseFactory":[function(require,module,exports){
+module.exports=require('28MaEi');
+},{}],"28MaEi":[function(require,module,exports){
+var SimpleExerciseFactory = require("./SimpleExerciseFactory");
+var util = require("util");
+
+function DivisionExerciseFactory()
+{
+	SimpleExerciseFactory.call(this);
+	this.operationSymbol = ':';
+	this.quotient = undefined;
+}
+
+util.inherits(DivisionExerciseFactory, SimpleExerciseFactory);
+
+DivisionExerciseFactory.prototype.calculate = function(firstNumber, secondNumber)
+{
+	var solution = undefined;
+	if(this.quotient !== undefined)
+		solution = this.quotient;
+	else
+		solution = firstNumber / secondNumber;
+
+	return solution;	
+}
+
+DivisionExerciseFactory.prototype.getText = function(firstNumber, secondNumber)
+{
+	return secondNumber + ':' + firstNumber;
+}
+
+DivisionExerciseFactory.prototype.getSecondNumber = function(maximumNumber, firstNumber)
+{
+	this.quotient = this.getRandomNumber(0, firstNumber);
+	return firstNumber * this.quotient;
+}
+
+
+module.exports = DivisionExerciseFactory;
+
+},{"./SimpleExerciseFactory":11,"util":28}],5:[function(require,module,exports){
 var EventEmitter = require("events").EventEmitter;
 var util = require("util");
 
@@ -62,9 +102,7 @@ util.inherits(Exercise, EventEmitter);
 
 module.exports = Exercise;
 
-},{"events":22,"util":26}],"./ExerciseFactory":[function(require,module,exports){
-module.exports=require('9TUnR2');
-},{}],"9TUnR2":[function(require,module,exports){
+},{"events":24,"util":28}],"seTeMO":[function(require,module,exports){
 var SpecificExerciseFactory = require("./SpecificExerciseFactory");
 
 var specificExerciseFactories = [];
@@ -98,7 +136,9 @@ module.exports =
 	}
 }
 
-},{"./SpecificExerciseFactory":"5XhwFI"}],6:[function(require,module,exports){
+},{"./SpecificExerciseFactory":"ISNl7S"}],"./ExerciseFactory":[function(require,module,exports){
+module.exports=require('seTeMO');
+},{}],8:[function(require,module,exports){
 module.exports =
 {
 	// Todo: put in configuration
@@ -106,8 +146,8 @@ module.exports =
 }
 
 },{}],"./MultiplicationExerciseFactory":[function(require,module,exports){
-module.exports=require('zTfEJP');
-},{}],"zTfEJP":[function(require,module,exports){
+module.exports=require('xI35cV');
+},{}],"xI35cV":[function(require,module,exports){
 var SimpleExerciseFactory = require("./SimpleExerciseFactory");
 var util = require("util");
 
@@ -132,7 +172,7 @@ MultiplicationExerciseFactory.prototype.calculate = function(firstNumber, second
 
 module.exports = MultiplicationExerciseFactory;
 
-},{"./SimpleExerciseFactory":9,"util":26}],9:[function(require,module,exports){
+},{"./SimpleExerciseFactory":11,"util":28}],11:[function(require,module,exports){
 var SpecificExerciseFactory = require("./SpecificExerciseFactory");
 var Exercise = require("./Exercise");
 var util = require("util");
@@ -156,6 +196,11 @@ SimpleExerciseFactory.prototype.getSecondNumber = function(maximumNumber, firstN
 	return firstNumber + this.getFirstNumber(maximumNumber);
 }
 
+SimpleExerciseFactory.prototype.getText = function(firstNumber, secondNumber)
+{
+	return firstNumber + this.operationSymbol.toString() + secondNumber;
+}
+
 SimpleExerciseFactory.prototype.getRandomExercise = function(difficulty)
 {
 	if(difficulty == undefined || parseInt(difficulty) == Math.NaN)
@@ -172,13 +217,13 @@ SimpleExerciseFactory.prototype.getRandomExercise = function(difficulty)
 
 	var correctAnswer = this.calculate(firstNumber, secondNumber);
 
-	var exercise = new Exercise(firstNumber + this.operationSymbol.toString() + secondNumber, correctAnswer);
+	var exercise = new Exercise(this.getText(firstNumber, secondNumber), correctAnswer);
 	return exercise;
 }
 
 module.exports = SimpleExerciseFactory;
 
-},{"./Exercise":3,"./SpecificExerciseFactory":"5XhwFI","util":26}],"5XhwFI":[function(require,module,exports){
+},{"./Exercise":5,"./SpecificExerciseFactory":"ISNl7S","util":28}],"ISNl7S":[function(require,module,exports){
 var ExerciseFactoryConfiguration = require("./ExerciseFactoryConfiguration");
 
 function SpecificExerciseFactory()
@@ -240,11 +285,11 @@ SpecificExerciseFactory.prototype.getRandomExercise = function(difficulty)
 
 module.exports = SpecificExerciseFactory;
 
-},{"./ExerciseFactoryConfiguration":6}],"./SpecificExerciseFactory":[function(require,module,exports){
-module.exports=require('5XhwFI');
+},{"./ExerciseFactoryConfiguration":8}],"./SpecificExerciseFactory":[function(require,module,exports){
+module.exports=require('ISNl7S');
 },{}],"./SubtractionExerciseFactory":[function(require,module,exports){
-module.exports=require('I3n/ls');
-},{}],"I3n/ls":[function(require,module,exports){
+module.exports=require('fYftsI');
+},{}],"fYftsI":[function(require,module,exports){
 var SimpleExerciseFactory = require("./SimpleExerciseFactory");
 var util = require("util");
 
@@ -262,7 +307,7 @@ SubtractionExerciseFactory.prototype.calculate = function(firstNumber, secondNum
 }
 
 
-SimpleExerciseFactory.prototype.getSecondNumber = function(maximumNumber, firstNumber)
+SubtractionExerciseFactory.prototype.getSecondNumber = function(maximumNumber, firstNumber)
 {
 	return this.getRandomNumber(0, firstNumber);
 }
@@ -270,7 +315,9 @@ SimpleExerciseFactory.prototype.getSecondNumber = function(maximumNumber, firstN
 
 module.exports = SubtractionExerciseFactory;
 
-},{"./SimpleExerciseFactory":9,"util":26}],"EMW8pn":[function(require,module,exports){
+},{"./SimpleExerciseFactory":11,"util":28}],"./TimeTraining":[function(require,module,exports){
+module.exports=require('A2i1yB');
+},{}],"A2i1yB":[function(require,module,exports){
 var Training = require("./Training");
 var util = require("util");
 
@@ -320,9 +367,9 @@ TimeTraining.prototype.getRemainingSeconds = function(referenceDate)
 
 module.exports = TimeTraining;
 
-},{"./Training":18,"util":26}],"./TimeTraining":[function(require,module,exports){
-module.exports=require('EMW8pn');
-},{}],"qdIHSi":[function(require,module,exports){
+},{"./Training":20,"util":28}],"./TimeTrainingConfiguration":[function(require,module,exports){
+module.exports=require('GBJB1L');
+},{}],"GBJB1L":[function(require,module,exports){
 var util = require("util");
 var TrainingConfiguration = require("./TrainingConfiguration");
 var TimeTraining = require("./TimeTraining");
@@ -349,9 +396,7 @@ util.inherits(TimeTrainingConfiguration, TrainingConfiguration);
 
 module.exports = TimeTrainingConfiguration;
 
-},{"./TimeTraining":"EMW8pn","./TrainingConfiguration":19,"util":26}],"./TimeTrainingConfiguration":[function(require,module,exports){
-module.exports=require('qdIHSi');
-},{}],18:[function(require,module,exports){
+},{"./TimeTraining":"A2i1yB","./TrainingConfiguration":21,"util":28}],20:[function(require,module,exports){
 var ExerciseFactory = require("./ExerciseFactory");
 var EventEmitter = require("events").EventEmitter;
 var util = require("util");
@@ -423,7 +468,7 @@ util.inherits(Training, EventEmitter);
 
 module.exports = Training;
 
-},{"./ExerciseFactory":"9TUnR2","events":22,"util":26}],19:[function(require,module,exports){
+},{"./ExerciseFactory":"seTeMO","events":24,"util":28}],21:[function(require,module,exports){
 
 function TrainingConfiguration()
 {
@@ -437,9 +482,7 @@ TrainingConfiguration.prototype.create = function()
 
 module.exports = TrainingConfiguration;
 
-},{}],"./TrainingReport":[function(require,module,exports){
-module.exports=require('ccLtbf');
-},{}],"ccLtbf":[function(require,module,exports){
+},{}],"K85AHI":[function(require,module,exports){
 var Training = require("./Training");
 
 
@@ -480,7 +523,9 @@ function TrainingReport(training)
 
 module.exports = TrainingReport;
 
-},{"./Training":18}],22:[function(require,module,exports){
+},{"./Training":20}],"./TrainingReport":[function(require,module,exports){
+module.exports=require('K85AHI');
+},{}],24:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -782,7 +827,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],23:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -807,7 +852,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],24:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -852,6 +897,13 @@ process.browser = true;
 process.env = {};
 process.argv = [];
 
+function noop() {}
+
+process.on = noop;
+process.once = noop;
+process.off = noop;
+process.emit = noop;
+
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
 }
@@ -862,15 +914,16 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],25:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],26:[function(require,module,exports){
-var process=require("__browserify_process"),global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};// Copyright Joyent, Inc. and other Node contributors.
+},{}],28:[function(require,module,exports){
+(function (process,global){
+// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -1457,4 +1510,5 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-},{"./support/isBuffer":25,"__browserify_process":24,"inherits":23}]},{},[])
+}).call(this,require("/usr/local/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./support/isBuffer":27,"/usr/local/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":26,"inherits":25}]},{},[])

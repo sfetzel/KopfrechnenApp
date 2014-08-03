@@ -15,7 +15,7 @@ SubtractionExerciseFactory.prototype.calculate = function(firstNumber, secondNum
 }
 
 
-SimpleExerciseFactory.prototype.getSecondNumber = function(maximumNumber, firstNumber)
+SubtractionExerciseFactory.prototype.getSecondNumber = function(maximumNumber, firstNumber)
 {
 	return this.getRandomNumber(0, firstNumber);
 }

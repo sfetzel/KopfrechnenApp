@@ -21,6 +21,11 @@ SimpleExerciseFactory.prototype.getSecondNumber = function(maximumNumber, firstN
 	return firstNumber + this.getFirstNumber(maximumNumber);
 }
 
+SimpleExerciseFactory.prototype.getText = function(firstNumber, secondNumber)
+{
+	return firstNumber + this.operationSymbol.toString() + secondNumber;
+}
+
 SimpleExerciseFactory.prototype.getRandomExercise = function(difficulty)
 {
 	if(difficulty == undefined || parseInt(difficulty) == Math.NaN)
@@ -37,7 +42,7 @@ SimpleExerciseFactory.prototype.getRandomExercise = function(difficulty)
 
 	var correctAnswer = this.calculate(firstNumber, secondNumber);
 
-	var exercise = new Exercise(firstNumber + this.operationSymbol.toString() + secondNumber, correctAnswer);
+	var exercise = new Exercise(this.getText(firstNumber, secondNumber), correctAnswer);
 	return exercise;
 }
 

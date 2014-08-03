@@ -5,12 +5,15 @@ var ExerciseFactory = require("./ExerciseFactory");
 var AdditionExerciseFactory = require("./AdditionExerciseFactory");
 var SubtractionExerciseFactory = require("./SubtractionExerciseFactory");
 var MultiplicationExerciseFactory = require("./MultiplicationExerciseFactory");
+var DivisionExerciseFactory = require("./DivisionExerciseFactory");
 
 // Initialization for Library
 // Todo
+
 ExerciseFactory.registerFactory(new AdditionExerciseFactory());
 ExerciseFactory.registerFactory(new SubtractionExerciseFactory());
 ExerciseFactory.registerFactory(new MultiplicationExerciseFactory());
+ExerciseFactory.registerFactory(new DivisionExerciseFactory());
 
 angular.module('KopfrechnenApp').service('TrainingService', function ()
 {
